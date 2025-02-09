@@ -136,6 +136,7 @@
         </video>
     </div>
         <audio id="sadAudio" loop><source src="sadmusic.mp3"></audio>
+        <audio id="blue" loop><source src="yung kai - blue (Lyrics).mp3"></audio>
  
 
     <script>
@@ -143,6 +144,8 @@
         let noHoverCount = 0; 
         let yesClicked = false;
         let sadAudio = document.getElementById("sadAudio"); 
+        let blue = document.getElementById("blue");
+        blue.currentTime = 19
     
         
         let noButton = document.getElementById("noButton");
@@ -172,6 +175,7 @@
         function showNoImage() {
             let imageContainer = document.getElementById("image-container");
             let dynamicImage = document.getElementById("dynamicImage");
+            blue.pause()
     
             if (yesClicked) {
                 dynamicImage.src = "https://media.makeameme.org/created/dude-what-077147b68b.jpg";
@@ -201,6 +205,7 @@
     
             dynamicImage.src = "https://media.tenor.com/UReMpVqE9_UAAAAM/mafuyu-satou.gif"; 
             imageContainer.style.display = "block";
+            blue.play()
             sadAudio.pause()
         }
     
@@ -208,10 +213,11 @@
             yesClicked = true; 
             
             let video = document.getElementById("video")
-            video.volume = 0.1;
+            video.volume = 0.7
             document.getElementById("image-container").style.display = "none";
             document.getElementById("video-container").style.display = "block";
             document.getElementById("video").play();
+            blue.pause()
         }
     
         function showHearts() {
