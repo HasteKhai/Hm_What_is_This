@@ -180,11 +180,13 @@
             if (yesClicked) {
                 dynamicImage.src = "https://media.makeameme.org/created/dude-what-077147b68b.jpg";
                 document.getElementById("responseMessage").innerHTML = "Ayo, what the fake???";
+                document.getElementById("video-container").style.display = "none";
+                video.pause()
             } else {
                 noHoverCount++;
     
                 if (noHoverCount >= 5) {
-                    document.getElementById("responseMessage").innerHTML = "Oh... okay then";
+                    document.getElementById("responseMessage").innerHTML = "Trying really hard to press on that button huh. It's okay... I understand.";
                     dynamicImage.src = "https://media4.giphy.com/media/7SF5scGB2AFrgsXP63/giphy.gif";
                     sadAudio.play();
                 } else {
@@ -199,7 +201,8 @@
             let imageContainer = document.getElementById("image-container");
             let dynamicImage = document.getElementById("dynamicImage");
     
-            if (document.getElementById("responseMessage").innerHTML === "Oh... okay then") {
+            if (document.getElementById("responseMessage").innerHTML === "Trying really hard to press on that button huh. It's okay... I understand."
+                || document.getElementById("responseMessage").innerHTML === "Ayo, what the fake???") {
                 document.getElementById("responseMessage").innerHTML = "";
             }
     
@@ -211,6 +214,10 @@
     
         function showVideo() {
             yesClicked = true; 
+
+            if (document.getElementById("responseMessage").innerHTML === "Ayo, what the fake???") {
+                document.getElementById("responseMessage").innerHTML = "";
+            }
             
             let video = document.getElementById("video")
             video.volume = 0.7
