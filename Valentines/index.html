@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>It's Almost Valentines Day ❤️</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', 'Lucida Handwriting', cursive;
+            background: linear-gradient(to bottom, #ffccd5, #ffb3c6, #ff99b9);
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            height: 100vh;
+        }
+
+        h1 {
+            margin-top: 100px;
+            color: #ff3366;
+            font-size: 45px;
+            text-shadow: 2px 2px #ff99b9;
+        }
+
+        .container {
+            margin-top: 40px;
+        }
+
+        .btn {
+            font-size: 25px;
+            padding: 15px 30px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: 0.3s ease;
+            box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .yes-btn {
+            background-color: #ff3366;
+            color: white;
+        }
+
+        .yes-btn:hover {
+            background-color: #e62e5c;
+        }
+
+        .no-btn {
+            background-color: #999;
+            color: white;
+            position: absolute;
+        }
+
+        .message {
+            font-size: 30px;
+            color: #ff4d4d;
+            font-weight: bold;
+            margin-top: 30px;
+        }
+
+        #video-container {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #video-container video {
+            width: 15%;
+            border-radius: 15px;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .heart-img {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            animation: float 7s linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes float {
+            0% {
+                opacity: 0;
+                transform: translateY(0px) scale(0.5);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-300px) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-800px) scale(0.7);
+            }
+        }
+
+        #image-container {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #image-container img {
+            width: 600px;
+            border-radius: 15px;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Um excuse me, thoughts on being my Valentine? ❤️</h1>
+
+    <div class="container">
+        <button class="btn yes-btn" id="yesButton" onclick="showVideo()" onmouseover="showYesGif()">Yes</button>
+        <button class="btn no-btn" id="noButton" onmouseover="moveNo()" onmouseenter="showNoImage()">No</button>
+    </div>
+
+    <p class="message" id="responseMessage"></p>
+
+    <div id="image-container">
+        <img id="dynamicImage" src="" alt="Reaction Image">
+    </div>
+
+    <!-- Video Container -->
+    <div id="video-container">
+        <video id="video" controls>
+            <source src="Download.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <script>
+        let noHoverCount = 0; 
+        let yesClicked = false; 
+
+        function createHearts() {
+            for (let i = 0; i < 30; i++) {
+                let heart = document.createElement("img");
+                heart.src = "https://thumbs.dreamstime.com/b/red-abstract-heart-sign-transparent-background-valentines-day-blank-button-template-logo-design-concepts-badges-banners-107571954.jpg"; 
+                heart.className = "heart-img";
+                heart.style.left = Math.random() * window.innerWidth + "px";
+                heart.style.animationDelay = Math.random() * 3 + "s";
+                document.body.appendChild(heart);
+            }
+        }
+
+        createHearts();
+
+        function moveNo() {
+            let noButton = document.getElementById("noButton");
+            let x = Math.random() * window.innerWidth * 0.8;
+            let y = Math.random() * window.innerHeight * 0.8;
+
+            noButton.style.left = x + "px";
+            noButton.style.top = y + "px";
+        }
+
+        function showNoImage() {
+            let imageContainer = document.getElementById("image-container");
+            let dynamicImage = document.getElementById("dynamicImage");
+
+            if (yesClicked) {
+                dynamicImage.src = "https://media.makeameme.org/created/dude-what-077147b68b.jpg";
+                document.getElementById("responseMessage").innerHTML = "Ayo what the fake?";
+            } else {
+                noHoverCount++;
+
+                if (noHoverCount >= 5) {
+                    document.getElementById("responseMessage").innerHTML = "Oh... okay then";
+                    dynamicImage.src = "https://media4.giphy.com/media/7SF5scGB2AFrgsXP63/giphy.gif";
+                } else {
+                    dynamicImage.src = "https://uploads.dailydot.com/2024/04/confused-nick-young-.jpg"; 
+                }
+            }
+
+            imageContainer.style.display = "block";
+        }
+
+        function showYesGif() {
+            let imageContainer = document.getElementById("image-container");
+            let dynamicImage = document.getElementById("dynamicImage");
+
+            if (document.getElementById("responseMessage").innerHTML === "Oh... okay then") {
+                document.getElementById("responseMessage").innerHTML = "";
+            }
+
+            dynamicImage.src = "https://media.tenor.com/UReMpVqE9_UAAAAM/mafuyu-satou.gif"; 
+            imageContainer.style.display = "block";
+        }
+
+        function showVideo() {
+            yesClicked = true; 
+            
+            let video = document.getElementById("video")
+            video.volume = 0.1
+            document.getElementById("image-container").style.display = "none";
+            document.getElementById("video-container").style.display = "block";
+            document.getElementById("video").play();
+        }
+    </script>
+
+</body>
+</html>
