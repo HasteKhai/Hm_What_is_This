@@ -119,6 +119,7 @@
  
 
     <script>
+        showHearts()
         let noHoverCount = 0; 
         let yesClicked = false;
         let sadAudio = document.getElementById("sadAudio"); 
@@ -193,45 +194,95 @@
             document.getElementById("video").play();
         }
     
-        particlesJS("particles-js", {
-            "particles": {
-                "number": {
-                    "value": 60,
-                    "density": {
-                        "enable": false,
-                        "value_area": 800
+        function showHearts() {
+            particlesJS("particles-js", {
+                "particles": {
+                    "number": {
+                        "value": 60,
+                        "density": {
+                            "enable": false,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#ff3366"
+                    },
+                    "shape": {
+                        "type": "image",
+                        "image": {
+                            "src": "https://emojicdn.elk.sh/❤️",  // Restore hearts
+                            "width": 100,
+                            "height": 100
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.5,
+                        "random": true
+                    },
+                    "size": {
+                        "value": 20,
+                        "random": true
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 1.5,
+                        "direction": "top",
+                        "out_mode": "out"
+                    },
+                    "line_linked": {
+                        "enable": false
                     }
-                },
-                "color": {
-                    "value": "#ff3366"
-                },
-                "shape": {
-                    "type": "image",
-                    "image": {
-                        "src": "https://emojicdn.elk.sh/❤️",
-                        "width": 100,
-                        "height": 100
-                    }
-                },
-                "opacity": {
-                    "value": 0.5,
-                    "random": true
-                },
-                "size": {
-                    "value": 20,
-                    "random": true
-                },
-                "move": {
-                    "enable": true,
-                    "speed": 1.5,
-                    "direction": "top",
-                    "out_mode": "out"
-                },
-                "line_linked":{
-                    "enable": false
                 }
-            }
-        });
+            });
+        }
+
+        function replaceHeartsWithSkulls() {
+            particlesJS("particles-js", {
+                "particles": {
+                    "number": {
+                        "value": 60,
+                        "density": {
+                            "enable": false,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#000000"  
+                    },
+                    "shape": {
+                        "type": "image",
+                        "image": {
+                            "src": "https://emojicdn.elk.sh/💀",  
+                            "width": 100,
+                            "height": 100
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.5,
+                        "random": true
+                    },
+                    "size": {
+                        "value": 20,
+                        "random": true
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 1.5,
+                        "direction": "top",
+                        "out_mode": "out"
+                    },
+                    "line_linked": {
+                        "enable": false
+                    }
+                }
+            });
+        }
+
+
+
+        // Event listener to detect when sad music plays
+        sadAudio.addEventListener("play", replaceHeartsWithSkulls);
+        sadAudio.addEventListener("pause", showHearts);
     </script>
     
 
