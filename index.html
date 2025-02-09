@@ -236,7 +236,7 @@
             });
         }
 
-        function replaceHeartsWithSkulls() {
+        function replaceHeartsDeadge() {
             particlesJS("particles-js", {
                 "particles": {
                     "number": {
@@ -252,7 +252,7 @@
                     "shape": {
                         "type": "image",
                         "image": {
-                            "src": "https://emojicdn.elk.sh/💀",  
+                            "src": "deadge.png",  
                             "width": 100,
                             "height": 100
                         }
@@ -281,7 +281,7 @@
 
 
         // Event listener to detect when sad music plays
-        sadAudio.addEventListener("play", replaceHeartsWithSkulls);
+        sadAudio.addEventListener("play", replaceHeartsDeadge);
         sadAudio.addEventListener("pause", showHearts);
     </script>
     
