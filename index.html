@@ -115,27 +115,38 @@
             <source src="Download.mp4" type="video/mp4">
         </video>
     </div>
-    <div id="sadmusic">
-        <audio><source src=""></audio>
-    </div>
+        <audio id="sadAudio" loop><source src="sadmusic.mp3"></audio>
+ 
 
     <script>
         let noHoverCount = 0; 
-        let yesClicked = false; 
+        let yesClicked = false;
+        let sadAudio = document.getElementById("sadAudio"); 
     
+        
+        let noButton = document.getElementById("noButton");
+        let originalX = noButton.offsetLeft;
+        let originalY = noButton.offsetTop;
+
         function moveNo() {
-            let noButton = document.getElementById("noButton");
+            let moveRangeX = 500; 
+            let moveRangeY = 600; 
+
     
-            let maxX = window.innerWidth - noButton.offsetWidth; 
-            let maxY = window.innerHeight - noButton.offsetHeight; 
-    
-            let x = Math.random() * maxX;
-            let y = Math.random() * maxY;
-    
-            noButton.style.left = `${x}px`;
-            noButton.style.top = `${y}px`;
-            noButton.style.zIndex = "1000";  // Ensure it stays above other elements
+            let newX = originalX + (Math.random() * moveRangeX * 2 - moveRangeX);
+            let newY = originalY + (Math.random() * moveRangeY * 2 - moveRangeY);
+
+            
+            newX = Math.max(10, Math.min(newX, window.innerWidth - noButton.offsetWidth - 10));
+            newY = Math.max(10, Math.min(newY, window.innerHeight - noButton.offsetHeight - 10));
+
+            
+            noButton.style.position = "absolute";
+            noButton.style.left = `${newX}px`;
+            noButton.style.top = `${newY}px`;
+            noButton.style.zIndex = "1000"; 
         }
+
     
         function showNoImage() {
             let imageContainer = document.getElementById("image-container");
@@ -150,6 +161,7 @@
                 if (noHoverCount >= 5) {
                     document.getElementById("responseMessage").innerHTML = "Oh... okay then";
                     dynamicImage.src = "https://media4.giphy.com/media/7SF5scGB2AFrgsXP63/giphy.gif";
+                    sadAudio.play();
                 } else {
                     dynamicImage.src = "https://uploads.dailydot.com/2024/04/confused-nick-young-.jpg"; 
                 }
@@ -168,6 +180,7 @@
     
             dynamicImage.src = "https://media.tenor.com/UReMpVqE9_UAAAAM/mafuyu-satou.gif"; 
             imageContainer.style.display = "block";
+            sadAudio.pause()
         }
     
         function showVideo() {
